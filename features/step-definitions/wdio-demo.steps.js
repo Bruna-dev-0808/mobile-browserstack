@@ -6,6 +6,7 @@ const loginPage = require('../pageobjects/login.page');
 const formsPage = require('../pageobjects/forms.page');
 
 Given('que estou na Home do aplicativo', async () => {
+  await browser.reloadSession();
   await homePage.validateOpened();
 });
 
