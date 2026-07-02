@@ -28,6 +28,9 @@ BROWSERSTACK_DEVICE=Google Pixel 8
 BROWSERSTACK_OS_VERSION=14.0
 ```
 
+As credenciais atuais ficam no BrowserStack em **Account > Settings > Access Key**.
+Se aparecer `Invalid username or access-key`, atualize `BROWSERSTACK_USERNAME` e `BROWSERSTACK_ACCESS_KEY` no `.env`.
+
 Execute os testes:
 
 ```bash
