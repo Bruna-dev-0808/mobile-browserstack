@@ -2,6 +2,8 @@ require('dotenv').config();
 
 const platform = (process.env.PLATFORM || 'android').toLowerCase();
 const isAndroid = platform === 'android';
+const executionDate = new Date().toISOString().replace('T', ' ').slice(0, 19);
+const buildName = process.env.BROWSERSTACK_BUILD_NAME || `Desafio Mobile - ${executionDate}`;
 
 const requiredEnv = ['BROWSERSTACK_USERNAME', 'BROWSERSTACK_ACCESS_KEY', 'BROWSERSTACK_APP_ID'];
 for (const key of requiredEnv) {
@@ -29,8 +31,8 @@ exports.config = {
       'appium:autoGrantPermissions': true,
       'bstack:options': {
         projectName: 'Desafio Automacao Mobile',
-        buildName: 'WDIO Demo App - BrowserStack',
-        sessionName: 'Fluxos principais',
+        buildName,
+        sessionName: `Fluxos principais - ${executionDate}`,
         debug: true,
         networkLogs: true
       }
