@@ -64,6 +64,10 @@ exports.config = {
     }]
   ],
 
+  beforeScenario: async function () {
+    await browser.reloadSession();
+  },
+
   afterStep: async function (_step, _scenario, result) {
     if (!result.passed) {
       await browser.takeScreenshot();
