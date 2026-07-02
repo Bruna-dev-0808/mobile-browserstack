@@ -3,7 +3,31 @@ $ErrorActionPreference = "Stop"
 $appDir = Join-Path $PSScriptRoot "..\native-demo-app"
 $androidDir = Join-Path $appDir "android"
 $wrapperProperties = Join-Path $androidDir "gradle\wrapper\gradle-wrapper.properties"
+$localProperties = Join-Path $androidDir "local.properties"
 $apkPath = Join-Path $androidDir "app\build\outputs\apk\debug\app-debug.apk"
+
+function Resolve-AndroidSdkPath {
+    if ($env:ANDROID_HOME -and (Test-Path $env:ANDROID_HOME)) {
+        return $env:ANDROID_HOME
+    }
+
+    if ($env:ANDROID_SDK_ROOT -and (Test-Path $env:ANDROID_SDK_ROOT)) {
+        return $env:ANDROID_SDK_ROOT
+    }
+
+    $defaultSdkPath = Join-Path $env:LOCALAPPDATA "Android\Sdk"
+    if (Test-Path $defaultSdkPath) {
+        return $defaultSdkPath
+    }
+
+    throw "Android SDK nao encontrado. Instale pelo Android Studio ou configure ANDROID_HOME."
+}
+
+function Set-AndroidLocalProperties {
+    $sdkPath = Resolve-AndroidSdkPath
+    $escapedSdkPath = $sdkPath.Replace("\", "\\")
+    Set-Content -LiteralPath $localProperties -Value "sdk.dir=$escapedSdkPath" -Encoding UTF8
+}
 
 Push-Location $appDir
 try {
@@ -12,6 +36,7 @@ try {
     }
 
     npx expo prebuild --clean --platform android
+    Set-AndroidLocalProperties
 
     if (Test-Path $wrapperProperties) {
         $content = Get-Content -LiteralPath $wrapperProperties -Raw
