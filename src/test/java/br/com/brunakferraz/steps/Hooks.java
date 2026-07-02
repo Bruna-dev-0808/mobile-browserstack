@@ -1,20 +1,26 @@
 package br.com.brunakferraz.steps;
 
 import br.com.brunakferraz.base.BaseTest;
+import br.com.brunakferraz.utils.DriverManager;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import io.cucumber.java.Scenario;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 
-public class Hooks extends BaseTest {
+public class Hooks {
 
-    @BeforeEach
-    public void before() throws Exception {
-        setUp();
+    @Before
+    public void setUp() throws Exception {
+        BaseTest.setDriver(DriverManager.createDriver());
     }
 
-    @AfterEach
-    public void after() {
-        tearDown();
+    @After
+    public void tearDown(Scenario scenario) {
+        if (BaseTest.getDriver() != null) {
+            byte[] screenshot = ((TakesScreenshot) BaseTest.getDriver()).getScreenshotAs(OutputType.BYTES);
+            scenario.attach(screenshot, "image/png", scenario.getName());
+        }
+        DriverManager.quitDriver();
     }
 }

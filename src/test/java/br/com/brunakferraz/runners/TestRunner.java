@@ -10,11 +10,8 @@ import static io.cucumber.junit.platform.engine.Constants.PLUGIN_PROPERTY_NAME;
 
 @Suite
 @IncludeEngines("cucumber")
-@SelectClasspathResource("features")
+@SelectClasspathResource("features/wdio_demo.feature")
 @ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "br.com.brunakferraz.steps")
-@ConfigurationParameter(
-        key = PLUGIN_PROPERTY_NAME,
-        value = "pretty, html:target/cucumber-reporçoikit.html"
-)
+@ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "pretty, html:target/cucumber-report.html, json:target/cucumber-report.json")
 public class TestRunner {
 }

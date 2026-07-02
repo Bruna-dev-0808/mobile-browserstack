@@ -1,0 +1,3 @@
+[submodule "native-demo-app"]
+	path = native-demo-app
+	url = https://github.com/webdriverio/native-demo-app.git
