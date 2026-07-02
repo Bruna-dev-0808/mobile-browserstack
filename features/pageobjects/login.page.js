@@ -22,8 +22,10 @@ class LoginPage extends BasePage {
   }
 
   async getAlertMessage() {
-    const androidMessage = await $('id:android:id/message');
-    if (await androidMessage.isExisting()) {
+    const platformName = String(browser.capabilities.platformName || '').toLowerCase();
+
+    if (platformName.includes('android')) {
+      const androidMessage = await $('id:android:id/message');
       await androidMessage.waitForDisplayed();
       return androidMessage.getText();
     }
