@@ -48,6 +48,7 @@ exports.config = {
   framework: 'cucumber',
   cucumberOpts: {
     require: ['./features/step-definitions/**/*.js'],
+    tagExpression: 'not @manual',
     timeout: 90000
   },
 
