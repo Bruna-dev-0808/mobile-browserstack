@@ -81,9 +81,11 @@ class MenuPage extends BasePage {
     await this.open();
     const item = await this.getVisibleItem(itemName);
 
-    const rect = await item.getRect();
+    const location = await item.getLocation();
+    const size = await item.getSize();
+
     await browser.action('pointer')
-      .move({x: Math.round(rect.x + rect.width - 24), y: Math.round(rect.y + rect.height / 2)})
+      .move({x: Math.round(location.x + size.width - 24), y: Math.round(location.y + size.height / 2)})
       .down()
       .up()
       .perform();
