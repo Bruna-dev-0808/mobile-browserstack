@@ -16,3 +16,9 @@ Funcionalidade: Mensagens de erro
     Quando acesso a tela de Login
     E tento fazer cadastro com usuario "bruna@example.com", senha "10203040" e confirmacao "10203041"
     Entao devo ver a mensagem de validacao "Please enter the same password"
+
+  Cenario: Validar seguranca ao tentar login com senha errada
+    Dado que estou na Home do aplicativo
+    Quando acesso a tela de Login
+    E faco login com usuario "bob@example.com" e senha "senha_errada"
+    Entao devo ver a mensagem "Provided credentials do not match any user in this service."
