@@ -9,6 +9,23 @@ class HomePage extends BasePage {
     await this.homeScreen.waitForDisplayed();
   }
 
+  async openHome() {
+    if (await this.homeScreen.isDisplayed().catch(() => false)) {
+      return;
+    }
+
+    const homeTab = await $('~Home');
+    if (await homeTab.isDisplayed().catch(() => false)) {
+      await homeTab.click();
+      await this.validateOpened();
+      return;
+    }
+
+    await this.openMenu();
+    await this.waitAndClick('~side-menu-item-home');
+    await this.validateOpened();
+  }
+
   async openMenu() {
     await this.waitAndClick('~Menu');
   }

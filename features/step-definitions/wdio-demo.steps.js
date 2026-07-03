@@ -7,8 +7,8 @@ const formsPage = require('../pageobjects/forms.page');
 const menuPage = require('../pageobjects/menu.page');
 
 Given('que estou na Home do aplicativo', async () => {
-  await browser.reloadSession();
-  await homePage.validateOpened();
+  await browser.acceptAlert().catch(() => {});
+  await homePage.openHome();
 });
 
 When('acesso a tela de Login', async () => {
