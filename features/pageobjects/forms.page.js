@@ -21,12 +21,25 @@ class FormsPage extends BasePage {
     await this.waitAndClick('~switch');
   }
 
+  async selectDropdownOption(optionText) {
+    await this.waitAndClick('~Dropdown');
+    await this.waitAndClick(`android=new UiSelector().text("${optionText}")`);
+  }
+
+  async selectButton(buttonText) {
+    await this.waitAndClick(`android=new UiSelector().text("${buttonText}")`);
+  }
+
   async getTypedText() {
     return this.waitAndGetText('~input-text-result');
   }
 
   async getSwitchText() {
     return this.waitAndGetText('~switch-text');
+  }
+
+  async getDropdownText(optionText) {
+    return this.waitAndGetText(`android=new UiSelector().text("${optionText}")`);
   }
 }
 

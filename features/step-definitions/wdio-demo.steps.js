@@ -4,6 +4,7 @@ const {expect} = require('chai');
 const homePage = require('../pageobjects/home.page');
 const loginPage = require('../pageobjects/login.page');
 const formsPage = require('../pageobjects/forms.page');
+const menuPage = require('../pageobjects/menu.page');
 
 Given('que estou na Home do aplicativo', async () => {
   await browser.reloadSession();
@@ -62,6 +63,14 @@ When('aciono o switch', async () => {
   await formsPage.toggleSwitch();
 });
 
+When('seleciono no dropdown a opcao {string}', async (optionText) => {
+  await formsPage.selectDropdownOption(optionText);
+});
+
+When('clico no botao {string}', async (buttonText) => {
+  await formsPage.selectButton(buttonText);
+});
+
 Then('devo ver o texto digitado {string}', async (expectedText) => {
   const typedText = await formsPage.getTypedText();
   expect(typedText).to.equal(expectedText);
@@ -70,4 +79,25 @@ Then('devo ver o texto digitado {string}', async (expectedText) => {
 Then('devo ver o switch no estado ativo', async () => {
   const switchText = await formsPage.getSwitchText();
   expect(switchText).to.equal('Click to turn the switch OFF');
+});
+
+Then('devo ver a opcao {string} selecionada no dropdown', async (expectedText) => {
+  const selectedText = await formsPage.getDropdownText(expectedText);
+  expect(selectedText).to.equal(expectedText);
+});
+
+When('favorito a funcionalidade {string}', async (itemName) => {
+  await menuPage.toggleFavorite(itemName);
+});
+
+When('desfavorito a funcionalidade {string}', async (itemName) => {
+  await menuPage.toggleFavorite(itemName);
+});
+
+When('abro a funcionalidade {string}', async (itemName) => {
+  await menuPage.openItem(itemName);
+});
+
+Then('devo visualizar a funcionalidade {string}', async (itemName) => {
+  await menuPage.validateScreen(itemName);
 });
