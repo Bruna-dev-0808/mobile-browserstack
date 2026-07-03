@@ -1,9 +1,16 @@
 const BasePage = require('./base.page');
 
 class LoginPage extends BasePage {
+  get loginScreen() {
+    return $('~Login-screen');
+  }
+
   async validateOpened() {
-    const screen = await $('~Login-screen');
-    await screen.waitForDisplayed();
+    await this.loginScreen.waitForDisplayed();
+  }
+
+  async isOpened() {
+    return this.loginScreen.isDisplayed();
   }
 
   async login(email, password) {
@@ -19,6 +26,25 @@ class LoginPage extends BasePage {
     await this.waitAndSetValue('~input-password', password);
     await this.waitAndSetValue('~input-repeat-password', confirmation);
     await this.waitAndClick('~button-SIGN UP');
+  }
+
+  async submitLoginWithoutCredentials() {
+    await this.waitAndClick('~button-login-container');
+    await this.waitAndClick('~button-LOGIN');
+  }
+
+  async submitSignUpWithDifferentPasswords(email, password, confirmation) {
+    await this.waitAndClick('~button-sign-up-container');
+    await this.waitAndSetValue('~input-email', email);
+    await this.waitAndSetValue('~input-password', password);
+    await this.waitAndSetValue('~input-repeat-password', confirmation);
+    await this.waitAndClick('~button-SIGN UP');
+  }
+
+  async getValidationMessage(message) {
+    const element = await $(`android=new UiSelector().textContains("${message}")`);
+    await element.waitForDisplayed();
+    return element.getText();
   }
 
   async getAlertMessage() {

@@ -1,9 +1,16 @@
 const BasePage = require('./base.page');
 
 class FormsPage extends BasePage {
+  get formsScreen() {
+    return $('~Forms-screen');
+  }
+
   async validateOpened() {
-    const screen = await $('~Forms-screen');
-    await screen.waitForDisplayed();
+    await this.formsScreen.waitForDisplayed();
+  }
+
+  async isOpened() {
+    return this.formsScreen.isDisplayed();
   }
 
   async fillText(value) {

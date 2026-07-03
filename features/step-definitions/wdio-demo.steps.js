@@ -19,8 +19,16 @@ When('faco login com usuario {string} e senha {string}', async (email, password)
   await loginPage.login(email, password);
 });
 
+When('tento fazer login sem informar email e senha', async () => {
+  await loginPage.submitLoginWithoutCredentials();
+});
+
 When('faco cadastro com usuario {string}, senha {string} e confirmacao {string}', async (email, password, confirmation) => {
   await loginPage.signUp(email, password, confirmation);
+});
+
+When('tento fazer cadastro com usuario {string}, senha {string} e confirmacao {string}', async (email, password, confirmation) => {
+  await loginPage.submitSignUpWithDifferentPasswords(email, password, confirmation);
 });
 
 Then('devo ver a mensagem {string}', async (expectedMessage) => {
@@ -28,9 +36,22 @@ Then('devo ver a mensagem {string}', async (expectedMessage) => {
   expect(message).to.contain(expectedMessage);
 });
 
+Then('devo ver a mensagem de validacao {string}', async (expectedMessage) => {
+  const message = await loginPage.getValidationMessage(expectedMessage);
+  expect(message).to.contain(expectedMessage);
+});
+
 When('acesso a tela de Forms', async () => {
   await homePage.openForms();
   await formsPage.validateOpened();
+});
+
+Then('devo estar na tela de Login', async () => {
+  expect(await loginPage.isOpened()).to.equal(true);
+});
+
+Then('devo estar na tela de Forms', async () => {
+  expect(await formsPage.isOpened()).to.equal(true);
 });
 
 When('preencho o campo de texto com {string}', async (text) => {
