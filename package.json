@@ -1,7 +1,7 @@
 {
-  "name": "clean-mobile-browserstack",
+  "name": "mobile-browserstack",
   "version": "1.0.0",
-  "description": "Automacao mobile com WebdriverIO, Appium, BrowserStack, Cucumber, Chai e Allure para o WDIO Demo App.",
+  "description": "Automacao mobile com WebdriverIO, Appium, BrowserStack, Cucumber, Chai e Allure Report.",
   "private": true,
   "scripts": {
     "test": "wdio run ./wdio.conf.js",

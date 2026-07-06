@@ -1,15 +1,33 @@
-# Desafio de Automacao Mobile
+# Automacao Mobile - WDIO Demo App
 
-Projeto criado do zero com as tecnologias sugeridas no desafio:
+Projeto de automacao mobile para validacao dos principais fluxos do WDIO Demo App em nuvem, utilizando BrowserStack App Automate.
+
+## Tecnologias
 
 - JavaScript
 - WebdriverIO
 - Appium
-- BrowserStack
+- BrowserStack App Automate
+- Cucumber/Gherkin
 - Chai
 - Allure Report
 
-## Como executar
+## Estrutura
+
+```text
+features/
+  cadastro.feature
+  formulario.feature
+  login.feature
+  mensagens_erro.feature
+  navegacao.feature
+  pageobjects/
+  step-definitions/
+```
+
+O projeto segue o padrao Page Object, separando os elementos e acoes de cada tela da escrita dos cenarios. Os cenarios ficam em Gherkin, facilitando leitura e manutencao.
+
+## Configuracao
 
 Instale as dependencias:
 
@@ -17,7 +35,7 @@ Instale as dependencias:
 npm install
 ```
 
-Crie o arquivo `.env` com base no `.env.example`:
+Crie um arquivo `.env` na raiz do projeto usando o `.env.example` como referencia:
 
 ```text
 BROWSERSTACK_USERNAME=seu_usuario
@@ -28,33 +46,47 @@ BROWSERSTACK_DEVICE=Google Pixel 8
 BROWSERSTACK_OS_VERSION=14.0
 ```
 
-As credenciais atuais ficam no BrowserStack em **Account > Settings > Access Key**.
-Se aparecer `Invalid username or access-key`, atualize `BROWSERSTACK_USERNAME` e `BROWSERSTACK_ACCESS_KEY` no `.env`.
+As credenciais ficam disponiveis no BrowserStack em **Account > Settings > Access Key**.
 
-Execute os testes:
+## Execucao
+
+Para executar a suite:
 
 ```bash
 npm test
 ```
 
-Gerar relatorio Allure:
+Para executar por plataforma:
+
+```bash
+npm run test:android
+npm run test:ios
+```
+
+## Relatorio
+
+Gerar e abrir o relatorio Allure:
 
 ```bash
 npm run report
 npm run report:open
 ```
 
-## App usado
+## Cobertura automatizada
 
-Automacao preparada para o WDIO Demo App exibido no desafio, com fluxos de:
+Cenarios automatizados:
 
-- Login
-- Cadastro
-- Formulario
-- Switch
+- Login com sucesso
+- Cadastro com sucesso
+- Login sem credenciais
+- Login com senha incorreta
+- Cadastro com senhas divergentes
+- Preenchimento de formulario
+- Navegacao da Home para Login
+- Navegacao da Home para Forms
+
+Tambem existem cenarios marcados como `@manual` para fluxos que nao possuem tela estavel no app demonstrativo, como produtos, carrinho e checkout. Esses cenarios documentam cobertura planejada, mas nao entram na execucao automatica.
 
 ## Observacoes
 
-O projeto roda no BrowserStack. Nao precisa iniciar Appium local, emulator local ou gerar APK localmente.
-
-Voce precisa subir o app no BrowserStack App Automate e usar o `bs://...` retornado em `BROWSERSTACK_APP_ID`.
+A execucao e feita no BrowserStack. Nao e necessario iniciar Appium localmente, abrir emulador local ou gerar APK durante a execucao.

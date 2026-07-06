@@ -14,7 +14,7 @@ Funcionalidade: Mensagens de erro
   Cenario: Validar erro ao cadastrar com senhas diferentes
     Dado que estou na Home do aplicativo
     Quando acesso a tela de Login
-    E tento fazer cadastro com usuario "bruna@example.com", senha "10203040" e confirmacao "10203041"
+    E tento fazer cadastro com usuario "qa.user@example.com", senha "10203040" e confirmacao "10203041"
     Entao devo ver a mensagem de validacao "Please enter the same password"
 
   Cenario: Validar seguranca ao tentar login com senha errada
