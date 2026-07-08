@@ -1,4 +1,4 @@
-# Desafio de Automacao Mobile
+# Desafio de Automaçao Mobile
 
 Projeto de automacao mobile em Java, Maven, Cucumber, JUnit 5 e Appium para o app WDIO Demo App em React Native/Expo.
 
@@ -13,7 +13,7 @@ Projeto de automacao mobile em Java, Maven, Cucumber, JUnit 5 e Appium para o ap
 - Execucao local via Appium.
 - Execucao opcional no BrowserStack via parametros.
 
-## Pre-requisitos
+## Pré-requisitos
 
 - Java 21.
 - Maven.
@@ -71,13 +71,13 @@ Envie o app para o BrowserStack e rode informando as credenciais por parametro o
 mvn test -Dexecution=browserstack -Dplatform=android -Dbs.username=SEU_USUARIO -Dbs.accessKey=SUA_CHAVE -Dbs.app=bs://APP_ID
 ```
 
-## Relatorios e evidencias
+## Relatórios e evidências
 
-Apos a execucao, os relatorios ficam em:
+Após a execução, os relatórios ficam em:
 
 ```text
 target/cucumber-report.html
 target/cucumber-report.json
 ```
 
-Os screenshots sao anexados ao relatorio Cucumber ao final de cada cenario.
+Os screenshots sao anexados ao relatório Cucumber ao final de cada cenário.
